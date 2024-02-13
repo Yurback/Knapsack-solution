@@ -26,9 +26,14 @@ function knapsack(items, cap, cur_item) {
         }
         return updatedSack;
     } else if (valueWithItem===valueWithoutItem) {
+        for (let i=0; i<sackWithItem.items.length; i++) {
+            sackWithItem.items[i] = sackWithItem.items[i].concat(items[cur_item]);
+        }
         const newItems = sackWithItem.items.concat(sackWithoutItem.items)
         console.log(newItems);
-        const newAlt = (sackWithItem.alt >= sackWithoutItem.alt) ? sackWithItem.alt +1 : sackWithoutItem.alt +1;
+        //const newAlt = (sackWithItem.alt >= sackWithoutItem.alt) ? sackWithItem.alt +1 : sackWithoutItem.alt +1; 
+        // tiny tefactoring, now newAlt provide all alternatives countably
+        newAlt = newItems.length;
         
         const updatedSack = {
             items: newItems,
@@ -44,13 +49,13 @@ function knapsack(items, cap, cur_item) {
 }
 
 const package = [
-    {name: 'a', value: 1, weight:8},
-    {name: 'b', value: 2, weight:8},
-    {name: 'c', value: 2, weight:8}
-    // {name: 'd', value: 5, weight:3},
-    // {name: 'e', value: 25, weight:8},
-    // {name: 'f', value: 4, weight:1},
-    // {name: 'g', value: 10, weight:2}
+    {name: 'a', value: 1, weight:1},
+    {name: 'b', value: 7, weight:5},
+    {name: 'c', value: 7, weight:5},
+    {name: 'd', value: 4, weight:3},
+    {name: 'e', value: 11, weight:8},
+    {name: 'f', value: 4, weight:3},
+    {name: 'g', value: 10, weight:7}
 ];
 
 maxWeight = 8
